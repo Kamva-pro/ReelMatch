@@ -1,42 +1,29 @@
-import React, { useRef, useState } from "react";
-import {Text, Image, View, StyleSheet, ImageBackground } from 'react-native'
-import Video from 'react-native-video'
-
-
+import React from "react";
+import { View, StyleSheet, Pressable, Text } from 'react-native'
+import Card from './src/components/card'
+import users from './assets/data/users'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {Animated, useSharedValue, useAnimatedStyle} from 'react-native-reanimated'
 
 const App = () => {
-  const videoRef = React.useRef(null)
-
-const onBuffer = Buffer =>{
-  console.log("buffering")
-}
-
-const onError = Error =>{
-  console.log("Error loading video")
-}
+  const sharedValue = useSharedValue(0)
+  const cardStyle = useAnimatedStyle(() => ({
+    transform: [
+    {
+      translateX: sharedValue.value * 100
+    }
+    ],
+    opacity: sharedValue.value,
+  }))
   return (
     <View style= {styles.pageContainer}>
-      <View style={styles.card}>
-        <ImageBackground
-        source={{uri: "https://st.depositphotos.com/1000686/3738/i/450/depositphotos_37383675-stock-photo-portrait-of-a-young-beautiful.jpg"}}
-        style={styles.image}
-        >
-          <View style={styles.card_inner}>
-          <Text style={styles.nameText}>Elaine</Text>
-        <Text style={styles.ageText}>21</Text>
-          </View>
-
-        </ImageBackground>
-        
-      {/* <Video
-      onEnd = {onBuffer}
-      onError={onError}
-      videoRef= {videoRef}
-      style = {styles.image}
-      source={require("./assets/girl-1.mp4")}
-
-      /> */}
-      </View>
+      <Animated.View style={[styles.animatedCard, cardStyle]}
+      >
+      <Card user={users[0]}/>
+      </Animated.View>
+      <Pressable onPress={()=>(sharedValue.value = Math.random())}>
+        <Text>Change value</Text>
+      </Pressable>
     </View>
     
   ) 
@@ -49,37 +36,11 @@ const styles = StyleSheet.create({
     flex: 1,
     
   },
-  image: {width: '100%', height: '100%', borderRadius: 12, overflow: "hidden",justifyContent: "flex-end"
-},
-  card:{
-    width: '95%',
-    height: '70%',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.50,
-    shadowRadius: 12.35,
-
-    elevation: 19,
-  },
-  nameText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#ffffff"
-  },
-  ageText: {
-    fontWeight: "600",
-    fontSize: 18,
-    lineHeight: 25,
-    color: "#ffffff",
-
-  },
-
-  card_inner: {
-    padding: 12,
+ 
+  animatedCard: {
+    width: '100%',  justifyContent: 'center', alignItems: 'center'
   }
+
 })
 
 export default App;
