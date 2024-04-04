@@ -2,10 +2,7 @@ import React from "react";
 import { View, Image,Text, ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import facebookIcon from '../../assets/icons/facebook.png'; 
-import phoneIcon from '../../assets/icons/phone.png';
-import googleIcon from '../../assets/icons/google.png';
-import arrowIcon from '../../assets/icons/arrow.png';
+import {facebook, google, phone, arrow} from '../../assets/icons'
 
 
 
@@ -22,25 +19,25 @@ export default function WelcomeScreen() {
          <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("NameScreen")}>
          <View style={styles.buttonContent}>
             <Text style={styles.buttonText}>Register Now</Text>
-            <Image source={arrowIcon} style={styles.icon}/>
+            <Image source={arrow} style={styles.icon}/>
             {/* <Icon style={styles.icon} name="arrowright" size={24} color="white" /> */}
           </View>
     </TouchableOpacity>
     <TouchableOpacity style={styles.buttonAlt} onPress={()=> navigation.navigate("NameScreen")}>
          <View style={styles.buttonContent}>
-         <Image source={googleIcon}  />
+         <Image source={google}  />
             <Text style={styles.buttonAltText}>Login with Google</Text>
           </View>
     </TouchableOpacity>
     <TouchableOpacity style={styles.buttonAlt} onPress={()=> navigation.navigate("NameScreen")}>
          <View style={styles.buttonContent}>
-         <Image source={facebookIcon}/>
+         <Image source={facebook}/>
             <Text style={styles.buttonAltText}>Login with facebook</Text>
           </View>
     </TouchableOpacity>
     <TouchableOpacity style={styles.buttonAlt} onPress={()=> navigation.navigate("NameScreen")}>
          <View style={styles.buttonContent}>
-         <Image source={phoneIcon}/>
+         <Image source={phone}/>
             <Text style={styles.buttonAltText}>Login with phone number</Text>
           </View>
     </TouchableOpacity>

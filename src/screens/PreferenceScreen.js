@@ -7,6 +7,15 @@ export default function PreferenceScreen() {
   const navigation = useNavigation();
   const [name, setName] = useState("");
 
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [isNextActive, setIsNextActive] = useState(false);
+
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    setIsNextActive(true);
+  };
+
+
   const handleNext = () => {
     // You can add validation for name here
     navigation.navigate("VideoUploadScreen");
@@ -23,20 +32,33 @@ export default function PreferenceScreen() {
           
         }}
         >SHOW ME</Text>
-          <TouchableOpacity style={styles.optionButton} onPress={handleNext  }>
-        <Text style={styles.optionText}>Men</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.optionButton} onPress={handleNext  }>
-        <Text style={styles.optionText}>Women</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.optionButton} onPress={handleNext  }>
-        <Text style={styles.optionText}>Everyone</Text>
-    </TouchableOpacity>
+            <TouchableOpacity
+          style={[
+            styles.optionButton,
+            selectedOption === "Men" && styles.selectedOption,
+          ]}
+          onPress={() => handleOptionSelect("Men")}
+        >
+          <Text style={styles.optionText}>Men</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.optionButton,
+            selectedOption === "Women" && styles.selectedOption,
+          ]}
+          onPress={() => handleOptionSelect("Women")}
+        >
+          <Text style={styles.optionText}>Women</Text>
+        </TouchableOpacity>
           <Image style = {styles.image} source={require("../../assets/heyboo.png")} resizeMode="contain"/>
           <View style={{flex: 1, justifyContent: 'flex-end', marginBottom: 20}}>
-          <TouchableOpacity style={styles.button} onPress={handleNext  }>
-        <Text style={styles.buttonText}>NEXT</Text>
-    </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, !isNextActive && styles.inactiveButton]}
+            onPress={handleNext}
+            disabled={!isNextActive}
+          >
+            <Text style={styles.buttonText}>NEXT</Text>
+          </TouchableOpacity>
           </View>
         </View>
 
@@ -61,6 +83,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     minWidth: 250,
     paddingVertical: 10
+  },
+  inactiveButton: {
+    backgroundColor: "#CCCCCC", // Dull background color for inactive button
   },
   optionButton:{
     marginBottom: 12,
@@ -88,5 +113,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     textAlign: 'center',
+  },
+  selectedOption: {
+    backgroundColor: "#FF7F7F", 
   },
 })

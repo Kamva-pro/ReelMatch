@@ -23,7 +23,6 @@ export default function AgeScreen() {
         }}
         >Birth Date</Text>
         <TextInput
-            onChangeText={(text) => setName(text)}
             placeholder="DD / MM / YYYY"
             style={styles.textInput}
           />
@@ -37,7 +36,6 @@ export default function AgeScreen() {
         }}
         >Current City</Text>
         <TextInput
-            onChangeText={(text) => setName(text)}
             
             style={styles.textInput}
           />

@@ -15,6 +15,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ChatScreen from "../screens/ChatScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ChatDetailsScreen from "../screens/ChatDetailsScreen";
+// import Reels from "../screens/Reels"
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -80,6 +81,8 @@ export default function AppNavigation() {
         <Stack.Screen name="SexualityScreen" component={SexualityScreen} />
         <Stack.Screen name="AgeScreen" component={AgeScreen} />
         <Stack.Screen name="VideoUploadScreen" component={VideoUploadScreen} />
+        {/* <Stack.Screen name="Reels" component={Reels} /> */}
+
         <Stack.Screen name="HomeScreen" component={HomeTabs} />
         <Stack.Screen
           name="ChatDetails"
